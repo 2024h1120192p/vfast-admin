@@ -1,4 +1,5 @@
-const BASE_URL = 'https://ec2-15-207-110-230.ap-south-1.compute.amazonaws.com/api/v1';
+const BASE_URL = 'https://vfast-backend-16dd4b0bfa8f.herokuapp.com/api/v1';
+// const BASE_URL = 'https://ec2-15-207-110-230.ap-south-1.compute.amazonaws.com/api/v1';
 // const BASE_URL = 'https://e86a-103-144-92-171.ngrok-free.app/api/v1';
 
 /**
