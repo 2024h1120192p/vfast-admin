@@ -1,0 +1,243 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Hostel Booking Management Dashboard</title>
+  <!-- Bootstrap CSS -->
+  <link href="src/css/bootstrap.min.css" rel="stylesheet">
+  <!-- FontAwesome CSS -->
+  <link href="src/css/font-awesome.min.css" rel="stylesheet">
+  <!-- Custom CSS -->
+  <link rel="stylesheet" href="src/css/style.css">
+  <!-- Custom VFAST Styles -->
+  <link rel="stylesheet" href="src/css/vfast-style.css" type="text/css">
+</head>
+
+<body>
+
+  <!-- Sidebar Menu -->
+  <div class="d-flex flex-column bg-dark text-white vh-100 p-3" style="width: 220px; position: fixed;">
+    <div class="logo d-block bg-white p-3 rounded">
+        <a href="." style="margin-left: 18px;">
+            <img src="src/img/logo.png" alt="" height="35">
+        </a>
+    </div>
+    <h2 class="my-3">VFAST Admin</h2>
+    <ul class="nav nav-pills flex-column">
+      <li class="nav-item mb-2">
+        <a class="nav-link text-white active" onclick="showView('dashboard')" role="button">
+          <i class="fa fa-dashboard"></i> &nbsp; Dashboard
+        </a>
+      </li>
+      <li class="nav-item mb-2">
+        <a class="nav-link text-white" onclick="showView('request')" role="button">
+          <i class="fa fa-file"></i> &nbsp; Request Details
+        </a>
+      </li>
+      <li class="nav-item mb-2">
+        <a class="nav-link text-white" onclick="showView('availability')" role="button">
+          <i class="fa fa-check-circle"></i> &nbsp; Availability
+        </a>
+      </li>
+      <li class="nav-item mb-2">
+        <a class="nav-link text-white" onclick="showView('rooms')" role="button">
+          <i class="fa fa-bed"></i> &nbsp; Rooms
+        </a>
+      </li>
+    </ul>
+  </div>
+
+  <!-- Content Area -->
+  <div class="container-fluid" style="margin-left: 220px; padding: 20px; width: auto;">
+
+    <!-- Dashboard View -->
+    <div id="dashboard" class="view active">
+      <div class="row text-white my-4 g-4">
+        <!-- Bookings Card -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card bg-primary text-white h-100 shadow-sm">
+            <div class="card-body">
+              <div class="d-flex align-items-center mb-3">
+                <i class="fa-solid fa-calendar-day fa-2x me-3"></i>
+                <h5 class="card-title mb-0">Bookings</h5>
+              </div>
+              <div class="row">
+                <div class="col text-center">
+                  <h6>Today</h6>
+                  <p id="bookingsToday" class="display-6 fw-bold">0</p>
+                </div>
+                <div class="col text-center">
+                  <h6>Total</h6>
+                  <p id="totalBookings" class="display-6 fw-bold">0</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Arrivals Card (Customers Arrived) -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card bg-success text-white h-100 shadow-sm">
+            <div class="card-body">
+              <div class="d-flex align-items-center mb-3">
+                <i class="fa-solid fa-user-check fa-2x me-3"></i>
+                <h5 class="card-title mb-0">Arrivals</h5>
+              </div>
+              <div class="row">
+                <div class="col text-center">
+                  <h6>Pending</h6>
+                  <p id="arrivalsPending" class="display-6 fw-bold">0</p>
+                </div>
+                <div class="col text-center">
+                  <h6>Completed</h6>
+                  <p id="arrivalsCompleted" class="display-6 fw-bold">0</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Departures Card (Customers Departed) -->
+        <div class="col-lg-4 col-md-6">
+          <div class="card bg-danger text-white h-100 shadow-sm">
+            <div class="card-body">
+              <div class="d-flex align-items-center mb-3">
+                <i class="fa-solid fa-user-minus fa-2x me-3"></i>
+                <h5 class="card-title mb-0">Departures</h5>
+              </div>
+              <div class="row">
+                <div class="col text-center">
+                  <h6>Pending</h6>
+                  <p id="departuresPending" class="display-6 fw-bold">0</p>
+                </div>
+                <div class="col text-center">
+                  <h6>Completed</h6>
+                  <p id="departuresCompleted" class="display-6 fw-bold">0</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <hr>
+
+      <!-- Today's Bookings Table -->
+      <div class="table-responsive my-3">
+        <h3 class="mb-3">Today's Bookings</h3>
+        <table class="table table-bordered table-striped">
+          <thead class="table-light">
+            <tr>
+              <th>Reservation No</th>
+              <th>Name</th>
+              <th>Check In</th>
+              <th>Check Out</th>
+              <th>Status</th>
+              <th>Phone</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="bookingsTableBody">
+            <!-- Data will be inserted here dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Request View -->
+    <div id="request" class="view d-none">
+      <div class="table-responsive">
+        <h3>Booking Details</h3>
+        <table class="table table-bordered table-striped">
+          <thead class="table-light">
+            <tr>
+              <th>Reservation No</th>
+              <th>Name</th>
+              <th>Check In</th>
+              <th>Check Out</th>
+              <th>Status</th>
+              <th>Phone</th>
+              <th>Action</th>
+            </tr>
+          </thead>
+          <tbody id="requestTableBody">
+            <!-- Data will be inserted here dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Availability View -->
+    <div id="availability" class="view d-none">
+      <h3>Room Availability</h3>
+      <div class="table-responsive my-3">
+        <table class="table table-bordered table-striped">
+          <thead class="table-light">
+            <tr>
+              <th>Room Type</th>
+              <th>Total Rooms</th>
+              <th>Available</th>
+            </tr>
+          </thead>
+          <tbody id="availabilityTableBody">
+            <!-- Data will be inserted here dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+    <!-- Rooms View -->
+    <div id="rooms" class="view d-none">
+      <h3>Room Status</h3>
+      <div class="table-responsive my-3">
+        <table class="table table-bordered table-striped">
+          <thead class="table-light">
+            <tr>
+              <th>Room No</th>
+              <th>Room Type</th>
+              <th>Status</th>
+            </tr>
+          </thead>
+          <tbody id="roomsTableBody">
+            <!-- Data will be inserted here dynamically -->
+          </tbody>
+        </table>
+      </div>
+    </div>
+
+  </div>
+
+  <!-- Booking Details Modal -->
+  <div class="modal fade" id="bookingModal" tabindex="-1" aria-labelledby="bookingModalLabel" aria-hidden="true">
+    <div class="modal-dialog">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="bookingModalLabel">Booking Details</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <ul class="list-group">
+            <li class="list-group-item"><strong>Reservation No:</strong> <span id="modalReservationNo"></span></li>
+            <li class="list-group-item"><strong>Name:</strong> <span id="modalName"></span></li>
+            <li class="list-group-item"><strong>Check In:</strong> <span id="modalCheckIn"></span></li>
+            <li class="list-group-item"><strong>Check Out:</strong> <span id="modalCheckOut"></span></li>
+            <li class="list-group-item"><strong>Status:</strong> <span id="modalStatus"></span></li>
+            <li class="list-group-item"><strong>Phone:</strong> <span id="modalPhone"></span></li>
+          </ul>
+        </div>
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Bootstrap JS Bundle -->
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+  <!-- Custom Script -->
+  <script src="src/js/script.js"></script>
+</body>
+
+</html>
