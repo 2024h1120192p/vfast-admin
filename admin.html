@@ -243,6 +243,13 @@
 
   <!-- Custom Script -->
   <script src="src/js/script.js" ></script>
+
+  <script>
+    if(!getAuthToken()) {
+      setAuthToken(null);
+      window.location.href = "./login.html"
+    }
+  </script>
 </body>
 
 </html>
