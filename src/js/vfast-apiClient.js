@@ -24,32 +24,6 @@ function clearAuthToken(token) {
     localStorage.removeItem('authToken');
 }
 
-/**
- * Make an HTTP request to the API using jQuery's $.ajax.
- *
- * @param {string} endpoint - The API endpoint (e.g., '/api/v1/user/login').
- * @param {object} [options={}] - AJAX options.
- * @param {string} [options.method='GET'] - HTTP method (e.g., 'GET', 'POST', 'PUT', 'DELETE').
- * @param {object} [options.headers] - Additional headers to include in the request.
- * @param {object} [options.body] - The request payload to be sent as JSON.
- * @param {boolean} [requiresAuth=false] - Whether the endpoint requires authentication.
- * @returns {Promise<object>} A promise that resolves with the JSON response or rejects with an error.
- *
- * @throws {Error} Will throw an error if the response is not ok or if there's a network issue.
- *
- * @example
- * // Making a POST request with authentication
- * apiRequest('/api/v1/user/login', {
- *     method: 'POST',
- *     body: { username: 'user', password: 'pass' },
- * }, true)
- * .then(data => {
- *     console.log('Login successful:', data);
- * })
- * .catch(error => {
- *     console.error('Login failed:', error.message);
- * });
- */
 function apiRequest(endpoint, options = {}, requiresAuth = false) {
     const url = `${BASE_URL}${endpoint}`;
     const headers = Object.assign(

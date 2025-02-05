@@ -5,14 +5,14 @@ if(getAuthToken()) {
 }
 
 // Function to handle login form submission
-$('#loginForm').on('submit', function(e) {
+document.getElementById('loginForm').addEventListener('submit', function(e) {
     e.preventDefault();
 
     apiRequest('/user/login', {
         method: 'POST',
         body: {
-            username: $('#email').val(),
-            password: $('#password').val()
+            username: document.getElementById('email').value,
+            password: document.getElementById('password').value
         },
     }, false)
     .then(function(response) {
