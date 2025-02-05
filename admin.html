@@ -34,7 +34,7 @@
         </a>
     </div>
     <h2 class="my-3">VFAST Admin</h2>
-    <ul class="nav nav-pills flex-column">
+    <ul class="nav nav-pills flex-column h-100">
       <li class="nav-item mb-2">
         <a class="nav-link text-white active" onclick="showView('dashboard')" role="button">
           <i class="fa fa-dashboard"></i> &nbsp; Dashboard
@@ -53,6 +53,11 @@
       <li class="nav-item mb-2">
         <a class="nav-link text-white" onclick="showView('rooms')" role="button">
           <i class="fa fa-bed"></i> &nbsp; Rooms
+        </a>
+      </li>
+      <li class="nav-item mb-2 flex-grow-1 align-content-end">
+        <a class="nav-link text-danger btn" onclick="clearAuthToken();document.location.reload();" role="button">
+          <i class="fa fa-power-off"></i> &nbsp; Log out
         </a>
       </li>
     </ul>
