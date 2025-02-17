@@ -18,6 +18,7 @@ function jwt_decode(token) {
  */
 function setAuthToken(token) {
     localStorage.setItem('authToken', token);
+    localStorage.setItem('authToken_expires', jwt_decode(token).exp);
 }
 
 /**
@@ -25,6 +26,8 @@ function setAuthToken(token) {
  * @returns {string|null} The OAuth2 token.
  */
 function getAuthToken() {
+    const expires = localStorage.getItem('authToken_expires');
+    if (expires && Date.now() >= expires * 1000) clearAuthToken();
     return localStorage.getItem('authToken');
 }
 
@@ -101,10 +104,10 @@ async function apiRequest(endpoint, options = {}, requiresAuth = false) {
                     errorMessage = JSON.stringify(errorData.detail);
                 }
                 if (errorData.data) {
-                    errorMessage += " from server : " + JSON.stringify(errorData.data);
+                    errorMessage += " error_data : " + JSON.stringify(errorData.data);
                 }
                 if (errorData.message) {
-                    errorMessage += " from server : " + JSON.stringify(errorData.message);
+                    errorMessage += " error_message : " + JSON.stringify(errorData.message);
                 }
             } catch (e) {
                 console.log("Error parsing response JSON:", e);
