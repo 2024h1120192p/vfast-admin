@@ -100,3 +100,26 @@ tr .c-o {
         margin-top: 52px !important;
     }
 }
+
+.rooms-grid {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.type-grid {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.room {
+  display: inline-block;
+  width: 50px;
+  height: 50px;
+  margin: 5px;
+  text-align: center;
+  line-height: 50px;
+  color: white;
+  border-radius: 5px;
+}
