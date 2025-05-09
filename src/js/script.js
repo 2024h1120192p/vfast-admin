@@ -324,10 +324,13 @@ async function loadRoomsData() {
         roomDiv.textContent = room.room_number;
         if (room.status === 'Available') {
           roomDiv.classList.add('bg-success');
-        } else if (room.status === 'Occupied') {
+        } else if (room.status === 'Booked') {
           roomDiv.classList.add('bg-secondary');
         } else if (room.status === 'Maintenance') {
           roomDiv.classList.add('bg-warning');
+        }
+        else {
+          roomDiv.classList.add('bg-primary');
         }
         typeGrid.appendChild(roomDiv);
       });
